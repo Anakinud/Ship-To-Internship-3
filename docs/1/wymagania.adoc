@@ -1,0 +1,132 @@
+= Wstęp
+
+W pierwszym etapie tworzymy prosty program do obsadzania miejsc w samolocie. Program wczytuje plik tekstowy
+zawierający wstępną konfigurację i zajęcia miejsc w samolocie. Użytkownik następnie podaje komendy służące do obsadzenia ludzi w samolocie zgodnie z polityką od górnego lewego rogu. Program posiada na żądanie możliwość wypisania na STDOUT obecnego stanu samolotu.
+
+= Wymagania
+
+* Tworzymy aplikację konsolową która wczytuje plik do którego ścieżka przekazana jest jako arg[0] do uruchomienia programu a następnie program czeka na komendy na STDIN
+* W aplikacji obsługujemy tylko jeden samolot
+* Samolot posiada rzędy i miejsca
+* Konfiguracja pierwszego rzędu definiuje taki sam układ kolejnych rzędów aż do końca samolotu
+* Samolot składa się z 2 okien oraz dowolnej liczby miejsc i alejek
+* Paczkomat jest tworzony poprzez podanie jego wejściowej konfiguracji (rozmiaru oraz wstępnej zajętości) w formacie:
+
+[source]
+----
+|OX OX XX|
+|XX OX XX|
+|OX XX XO|
+|XX OX OO|
+|OX OO OX|
+|OX XX XO|
+|XX OX OO|
+|OX OO OX|
+|OX XX XO|
+|XX OX OO|
+----
+gdzie podany przykład jest samolotem z 10 rzędami po 6 miejsc
+
+Definicja linii (rzędu) samolotu wygląda następująco:
+[source]
+----
+|OX OX XX|
+----
+gdzie patrząc od lewej strony mamy: +
+"|" - oznacza okno +
+"O" - oznacza miejsce wolne +
+"X" - oznacza miejsce zajęte +
+" " - oznacza przerwę (przejście/alejke)
+
+
+Po wczytaniu samolotu program oczekuje na wprowadzenie jednej z 3 komend +
+----
+* "P X" oznacza chęć rezerwacji miejsca w samolocie
+* "D" oznacza wypisanie obecnego stanu samolotu. Format wypisania powinien być zgodne z formatem początkowego wprowadzenia samolotu
+* "T 1:4" zwalnia miejsce, gdzie pierwsza liczba jest numerem rzędu, druga numerem miejsca w rzędzie
+----
+* każda komenda powinna być zakończona znakiem nowej linii
+* komendy mogą być wprowadzane wielokrotnie w dowolnej kolejności
+* rezerwacja miejsc powinna się odbywać od lewego górnego miejsca a następnie w prawo a następnie w kolejnym rzędzie od lewej
+* w przypadku gdy rezerwacja kolejnego miejsca nie jest możliwa, komenda wprowadzenia powinna zostać zignorowana
+* na jednym miejscu może usiąść tylko 1 osoba
+
+
+= Przykładowo
+
+Mamy samolot z 6 miejscami w 8 rzędach
+----
+|OX XX XO|
+|XX OX OO|
+|OX OO OX|
+|OX XX XO|
+|XX OX OO|
+|OX OO OX|
+|XX OX OO|
+|OX OO OX|
+----
+po wykonaniu operacji rezerwacji 3 miejsc
+----
+P X
+P X
+P X
+----
+stan samolotu po wykonaniu komendy
+----
+D
+----
+powinien prezentować się następująco
+----
+|XX XX XX|
+|XX XX OO|
+|OX OO OX|
+|OX XX XO|
+|XX OX OO|
+|OX OO OX|
+|XX OX OO|
+|OX OO OX|
+----
+po wykonaniu kolejnej komendy dodania
+----
+P X
+P X
+----
+stan samolotu po wykonaniu komendy
+----
+D
+----
+powinien wyglądać następująco
+----
+|XX XX XX|
+|XX XX XX|
+|OX OO OX|
+|OX XX XO|
+|XX OX OO|
+|OX OO OX|
+|XX OX OO|
+|OX OO OX|
+----
+po wykonaniu komendy zwolnienia miejsca
+----
+T 1:2
+T 1:6
+----
+i wykonaniu komendy
+----
+D
+----
+stan samolotu powinien prezentować się następująco
+----
+|XO XX XO|
+|XX XX XX|
+|OX OO OX|
+|OX XX XO|
+|XX OX OO|
+|OX OO OX|
+|XX OX OO|
+|OX OO OX|
+----
+
+*_Uwaga_*
+Jeśli widzisz jakieś sytuacje brzegowe które należy obsłużyć - zaloguj taką sytuację lub pozostaw stosowny komentarz w kodzie
+//include::../cli_format_description.adoc[]

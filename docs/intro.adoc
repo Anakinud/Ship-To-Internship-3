@@ -1,0 +1,7 @@
+:leveloffset: +1
+
+Twoim zadaniem jest zaimplementowanie systemu rezerwacji miejsc w samolocie.
+
+Powodzenia :)
+
+:leveloffset: -1

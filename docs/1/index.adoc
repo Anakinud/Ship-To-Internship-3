@@ -1,0 +1,8 @@
+= Etap 1 - Struktura samolotu i jego miejsca
+:source-highlighter: rouge
+
+:leveloffset: +1
+
+include::wymagania.adoc[]
+
+:leveloffset: -1
