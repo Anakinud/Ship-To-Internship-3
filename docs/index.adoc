@@ -14,4 +14,6 @@ include::4/index.adoc[]
 
 include::5/index.adoc[]
 
+include::6/index.adoc[]
+
 :leveloffset: -1

@@ -10,7 +10,7 @@ zawierający wstępną konfigurację i zajęcia miejsc w samolocie. Użytkownik 
 * Samolot posiada rzędy i miejsca
 * Konfiguracja pierwszego rzędu definiuje taki sam układ kolejnych rzędów aż do końca samolotu
 * Samolot składa się z 2 okien oraz dowolnej liczby miejsc i alejek
-* Paczkomat jest tworzony poprzez podanie jego wejściowej konfiguracji (rozmiaru oraz wstępnej zajętości) w formacie:
+* Samolot jest tworzony poprzez podanie jego wejściowej konfiguracji (rozmiaru oraz wstępnej zajętości) w formacie:
 
 [source]
 ----
@@ -32,18 +32,20 @@ Definicja linii (rzędu) samolotu wygląda następująco:
 ----
 |OX OX XX|
 ----
-gdzie patrząc od lewej strony mamy: +
+gdzie patrząc od lewej strony mamy:
+----
 "|" - oznacza okno +
 "O" - oznacza miejsce wolne +
 "X" - oznacza miejsce zajęte +
 " " - oznacza przerwę (przejście/alejke)
+----
 
-
-Po wczytaniu samolotu program oczekuje na wprowadzenie jednej z 3 komend +
+Po wczytaniu samolotu program oczekuje na wprowadzenie jednej z 4 komend +
 ----
 * "P X" oznacza chęć rezerwacji miejsca w samolocie
 * "D" oznacza wypisanie obecnego stanu samolotu. Format wypisania powinien być zgodne z formatem początkowego wprowadzenia samolotu
 * "T 1:4" zwalnia miejsce, gdzie pierwsza liczba jest numerem rzędu, druga numerem miejsca w rzędzie
+* "exit" przestaje wczytywać kolejne komendy i wypisuje obecny stan samolotu (tak jak w przypadku "D") - na końcu wypisania program powinien zawierać znak końca linii
 ----
 * każda komenda powinna być zakończona znakiem nowej linii
 * komendy mogą być wprowadzane wielokrotnie w dowolnej kolejności
@@ -128,5 +130,5 @@ stan samolotu powinien prezentować się następująco
 ----
 
 *_Uwaga_*
-Jeśli widzisz jakieś sytuacje brzegowe które należy obsłużyć - zaloguj taką sytuację lub pozostaw stosowny komentarz w kodzie
+Jeśli widzisz jakieś sytuacje brzegowe które należy obsłużyć - pozostaw stosowny komentarz w kodzie
 //include::../cli_format_description.adoc[]

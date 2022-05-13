@@ -13,6 +13,7 @@ public class App {
     public static void main(String... args) throws IOException {
         List<String> input = Files.readAllLines(Paths.get(args[0]));
         for (var line : input) {
+            //Remove me and start development
             System.out.println(line);
         }
 
