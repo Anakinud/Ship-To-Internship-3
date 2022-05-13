@@ -1,0 +1,92 @@
+= Wstęp
+
+W tym etapie rozszerzamy nasz program o obsługę różnych polityk rezerwacji miejsc
+
+<<<
+= Wymagania
+
+* Program domyślnie sadza według polityki pierwszej - od lewego górnego roku w prawo a następnie w kolejny rządzie od lewej
+* Istnieje możliwość zmiany polityki sadzania na politykę drugą, która sadza od dolnego prawego miejsc w lewo a następnie rząd wyżej od prawej
+* Po zmianie strategii, wszystkie kolejne komendy dorezerwowywania miejsc powinny być realizowane według wybranej strategii
+* Strategia rezerwacji nie wpływu na komendę zwolnienia rezerwacji (przykładowo T 1:1) nadal zwalnia wskazane w komendzie miejsce
+* Istnieje możliwość zmiany polityki w trakcie trwania programu poprzez komendę
+----
+S 1 - włącza tryb strategii pierwszej
+S 2 - włącza tryb strategii drugiej
+----
+= Przykładowo
+
+Mamy samolot z 6 miejscami w 8 rzędach - program standardowo uruchamia się ze strategią rezerwacji numer 1
+----
+|OX XX XO|
+|XX OX OO|
+|OX OO OX|
+|OX XX XO|
+|XX OX OO|
+|OX OO OX|
+|XX OX OO|
+|OX OO OX|
+----
+po wykonaniu operacji rezerwacji 3 miejsc
+----
+P X
+P X
+P X
+----
+stan samolotu po wykonaniu komendy
+----
+D
+----
+powinien prezentować się następująco
+----
+|XX XX XX|
+|XX XX OO|
+|OX OO OX|
+|OX XX XO|
+|XX OX OO|
+|OX OO OX|
+|XX OX OO|
+|OX OO OX|
+----
+po wykonaniu komendy zmiany strategii
+----
+S 2
+----
+stan samolotu po wykonaniu komendy
+----
+D
+----
+powinien się nie zmienić w stosunku do poprzedniego i wyglądać następująco
+----
+|XX XX XX|
+|XX XX OO|
+|OX OO OX|
+|OX XX XO|
+|XX OX OO|
+|OX OO OX|
+|XX OX OO|
+|OX OO OX|
+----
+po wykonaniu komendy dodania, program usadza zgodnie z polityką S 2
+----
+P X
+P X
+P X
+----
+i wykonaniu komendy
+----
+D
+----
+stan samolotu powinien prezentować się następująco
+----
+|XX XX XX|
+|XX XX OO|
+|OX OO OX|
+|OX XX XO|
+|XX OX OO|
+|OX OO OX|
+|XX OX OO|
+|OX XX XX|
+----
+*_Uwaga_*
+Jeśli widzisz jakieś sytuacje brzegowe które należy obsłużyć - pozostaw stosowny komentarz w kodzie
