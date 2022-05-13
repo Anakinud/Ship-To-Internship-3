@@ -1,0 +1,176 @@
+openapi: 3.0.3
+info:
+  title: Ship To Internship 3
+  description: Ship To Internship 3 - REST API
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /plane:
+    put:
+      summary: Creates airplane seats configuration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Plane'
+      responses:
+        '200':
+          description: Created
+    get:
+      summary: Get current airplane seats configuration
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Plane'
+  /plane/seating-policy:
+    put:
+      summary: Changes seating policy
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SeatingPolicy'
+      responses:
+        '201':
+          description: Created
+  /plane/persons:
+    post:
+      summary: Adds new person to the airplane
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - type
+              properties:
+                type:
+                  $ref: '#/components/schemas/PersonType'
+                seatTypePreference:
+                  $ref: '#/components/schemas/SeatType'  
+      responses:
+        '201':
+          description: Added
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - rowId
+                  - placeId
+                properties:
+                  rowId:
+                    type: integer
+                  placeId:
+                    type: integer
+  /plane/persons/{rowId}/{placeId}:
+    delete:
+      summary: Deletes the person from the airplane
+      parameters:
+        - in: path
+          name: rowId
+          schema:
+            type: integer
+          required: true
+          description: the identifier of a row
+        - in: path
+          name: placeId
+          schema:
+            type: integer
+          required: true
+          description: the identifier of a place in a row
+      responses:
+        '204':
+          description: Deleted
+  /plane/unoccupied:
+    get:
+      summary: Get unoccupied number of seats with signature
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                number:
+                  type: integer
+                signature:
+                  type: string
+      responses:
+        '200':
+          description: Success
+components:
+  schemas:
+    PersonType:
+      type: string
+      enum:
+        - NORMAL
+        - VIP
+    Person:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/PersonType'
+    PlaceType:
+      type: string
+      enum:
+        - SEAT
+        - AISLE
+    Place:
+      type: object
+      discriminator:
+        propertyName: type
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/PlaceType'
+      example:
+        type: SEAT
+        person:
+          type: NORMAL
+    Aisle:
+      allOf:
+        - $ref: '#/components/schemas/Place'
+    SeatType:
+      type: string
+      enum: [WINDOW, AISLE]
+    Seat:
+      allOf:
+        - $ref: '#/components/schemas/Place'
+        - properties:
+            person:
+              $ref: '#/components/schemas/Person'
+    SeatingPolicy:
+      type: object
+      discriminator:
+        propertyName: type
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/SeatingPolicyType'           
+    SeatingPolicyType:
+      type: string
+      enum: [FROM_FRONT, FROM_BACK]          
+    Plane:
+      type: array
+      items:
+        type: array
+        items:
+          $ref: '#/components/schemas/Place'
+      example:
+        - - type: SEAT
+            person:
+              type: NORMAL
+          - type: SEAT
+          - type: SEAT
+            person:
+              type: VIP

@@ -2,3 +2,7 @@
 |O XO O|
 |X OO X|
 |O XO O|
+|X OO X|
+|O XO O|
+|X OO X|
+|O XO O|

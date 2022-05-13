@@ -1,5 +1,9 @@
 package com.idemia;
 
+import com.idemia.model.Plane;
+import com.idemia.parser.StringParser;
+import com.idemia.transformer.StringRetrieveCommand;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -9,22 +13,24 @@ import java.util.List;
 import java.util.Scanner;
 
 public class App {
-
     public static void main(String... args) throws IOException {
-        List<String> input = Files.readAllLines(Paths.get(args[0]));
-        for (var line : input) {
-            //Remove me and start development
-            System.out.println(line);
-        }
+        //readFromFile
+        testableMethod(args[0], System.in, System.out);
+    }
 
-        Scanner scanner = new Scanner(System.in);
+    protected static void testableMethod(String arg, InputStream inputStream, PrintStream outputStream) throws IOException {
+        List<String> input = Files.readAllLines(Paths.get(arg));
+        StringParser parser = new StringParser();
+        Plane plane = parser.parse(input);
+        Scanner scanner = new Scanner(inputStream);
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
             if ("EXIT".equals(line)) {
                 break;
             }
-            System.out.println(line);
+            plane.execute(parser.parseCommand(line));
         }
+        outputStream.print(plane.execute(new StringRetrieveCommand()));
     }
 
 }

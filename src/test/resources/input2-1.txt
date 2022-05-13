@@ -1,0 +1,4 @@
+|X OX O|
+|X XX X|
+|X XO X|
+|O OX X|
