@@ -1,0 +1,8 @@
+= Etap 3 - Preferencja miejsca
+:source-highlighter: rouge
+
+:leveloffset: +1
+
+include::wymagania.adoc[]
+
+:leveloffset: -1

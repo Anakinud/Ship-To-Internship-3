@@ -1,0 +1,72 @@
+= Wstęp
+
+W tym etapie rozszerzamy nasz program o obsługę preferencji zajmowanego miejsca
+
+<<<
+= Wymagania
+Wprowadzamy pojęcie preferencji miejsca
+----
+W - oznacza miejsce przy oknie
+
+A - miejsce przy korytarzu
+
+P X:W - program powinien wybrać pierwsze wolne miejsce przy oknie według wybranej polityki, jeśli nie znajdzie takiego miejsca wybiera pierwsze wolne miejsce według wybranej strategii
+
+P X:A - program powinien wybrać pierwsze wolne miejsce przy korytarzu według wybranej polityki, jeśli nie znajdzie takiego miejsca wybiera pierwsze wolne miejsce według wybranej strategii
+----
+
+= Przykładowo
+
+Mamy samolot z 6 miejscami w 8 rzędach - program standardowo uruchamia się ze strategią rezerwacji numer 1
+----
+|OX XX XO|
+|XX OX OO|
+|OX OO OX|
+|OX XX XO|
+|XX OX OO|
+|OX OO OX|
+|XX OX OO|
+|OX OO OX|
+----
+po wykonaniu operacji rezerwacji miejsca z preferencją alejki (program działa w strategii 1)
+----
+P X:A
+----
+stan samolotu po wykonaniu komendy
+----
+D
+----
+powinien prezentować się następująco
+----
+|OX XX XO|
+|XX XX OO|
+|OX OO OX|
+|OX XX XO|
+|XX OX OO|
+|OX OO OX|
+|XX OX OO|
+|OX OO OX|
+----
+po wykonaniu operacji rezerwacji 2 miejsc z preferencją alejki (program działa w nadal w strategii 1)
+----
+P X:W
+P X:W
+----
+stan samolotu po wykonaniu komendy
+----
+D
+----
+wygląda następująco
+----
+|XX XX XX|
+|XX XX OO|
+|OX OO OX|
+|OX XX XO|
+|XX OX OO|
+|OX OO OX|
+|XX OX OO|
+|OX OO OX|
+----
+
+*_Uwaga_*
+Jeśli widzisz jakieś sytuacje brzegowe które należy obsłużyć - pozostaw stosowny komentarz w kodzie
