@@ -1,0 +1,112 @@
+= Wstęp
+
+W tym etapie rozszerzamy nasz program o obsługę postaci VIPa.
+
+<<<
+= Wymagania
+
+* VIP musi mieć dookoła siebie wolne miejsca/okno/alejkę
+* Na potrzebę sadzania VIPa alejkę lub okno traktujemy jak wolne miejsce
+* Zauważ, że gdy rezerwujemy miejsce dla "zwykłej" osoby nadal musimy respektować politykę sadzania VIPa - tak, aby nie zająć jego wolnej przestrzeni dookoła
+
+----
+V - oznacza zajęte miejsce VIPa
+
+X - oznacza zajęte miejsce zwykłego pasażera
+
+P V - program powinien usadzić VIPa na pierwszym wolnym miejscu pozostawiając dookoła wolne miejsca
+
+P V:W - program powinien wybrać VIPa na pierwszym wolnym miejscu przy oknie pozostawiając dookoła wolne miejsca
+
+P V:A - program powinien wybrać VIPa na pierwszym wolnym miejscu przy alejce pozostawiając dookoła wolne miejsca
+----
+
+= Przykład 1
+
+Mamy samolot z 6 miejscami w 5 rzędach (bez alejek) - program standardowo uruchamia się ze strategią rezerwacji numer 1
+----
+|OOOOOO|
+|OOOOOO|
+|OOOOOO|
+|OOOOOO|
+|OOOOOO|
+----
+po wykonaniu operacji rezerwacji miejsca VIPa bez preferencji
+----
+P V
+----
+stan samolotu po wykonaniu komendy
+----
+D
+----
+powinien prezentować się następująco
+----
+|OOOOOO|
+|VOOOOO|
+|OOOOOO|
+|OOOOOO|
+|OOOOOO|
+
+Zauważ, że VIP został usadzony na pierwszym wolnym miejscu (zgodnie z polityką 1), które ma wolne miejsce (lub okno) w każdym kierunku
+----
+
+= Przykład 2
+
+Mamy samolot z 6 miejscami w 5 rzędach (z alejkami) - program standardowo uruchamia się ze strategią rezerwacji numer 1
+----
+|OX XX XO|
+|OO OX OO|
+|OO OO OX|
+|OO XX XO|
+|XX OX OO|
+----
+po wykonaniu operacji rezerwacji miejsca VIPa bez preferencji
+----
+P V
+----
+stan samolotu po wykonaniu komendy
+----
+D
+----
+powinien prezentować się następująco
+----
+|OX XX XO|
+|OO OX OO|
+|VO OO OX|
+|OO XX XO|
+|XX OX OO|
+
+Zauważ że jeżeli poprzednia komenda byłaby z preferencją usadzenia VIPa przy oknie to efekt byłby taki sam!
+----
+
+= Przykład 3
+
+Mamy samolot z 6 miejscami w 5 rzędach (z alejkami) - program standardowo uruchamia się ze strategią rezerwacji numer 1
+----
+|OX XX XO|
+|OO OX OO|
+|OO OO OX|
+|OO XX XO|
+|XX OX OO|
+----
+po wykonaniu operacji rezerwacji miejsca VIPa z preferencją alejki
+----
+P V:A
+----
+stan samolotu po wykonaniu komendy
+----
+D
+----
+powinien prezentować się następująco
+----
+|OX XX XO|
+|OO OX OO|
+|OV OO OX|
+|OO XX XO|
+|XX OX OO|
+
+----
+
+
+*_Uwaga_*
+Jeśli widzisz jakieś sytuacje brzegowe które należy obsłużyć - pozostaw stosowny komentarz w kodzie
