@@ -1,0 +1,14 @@
+= Wstęp
+
+W tym etapie chcemy podpisać odpowiedź zwracającą wraz podpisem
+
+<<<
+= Wymagania
+
+* Do endpointu GET /plane/unoccupied endpoint zgodnie ze specyfikacją OpenAPI zdefiniowaną w https://swagger.otlabs.fr/
+* Wykorzystaj klucz "_SECURE KEY_"
+* *Wskazówka!* Wykorzystaj przykład z dokumentacji dostępnej pod adresem +
+https://docs.oracle.com/en/java/javase/11/security/java-cryptography-architecture-jca-reference-guide.html#GUID-2BCFDD85-D533-4E6C-8CE9-29990DEB0190
+
+*_Uwaga_*
+Jeśli widzisz jakieś sytuacje brzegowe które należy obsłużyć - zaloguj taką sytuację lub pozostaw stosowny komentarz w kodzie
